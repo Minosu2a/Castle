@@ -169,6 +169,11 @@ public class InputManager : Singleton<InputManager>
         {
 
         }
+
+        if (Input.GetKeyUp(_gunSwitchInput))
+        {
+
+        }
     }
 
     private void ReloadCheck()

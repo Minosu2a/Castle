@@ -18,6 +18,8 @@ public class CharacterController : MonoBehaviour
 
     [Header("Gun")]
     [SerializeField] private Weapon _currentWeapon = null;
+    [SerializeField] private Weapon _secondaryWeapon = null;
+
 
 
 
@@ -198,6 +200,25 @@ public class CharacterController : MonoBehaviour
         _aimLine.gameObject.SetActive(false);
     }
     #endregion Secondary Click
+
+    public void SecondarySwitch()
+    {
+        Weapon tempWeapon = _currentWeapon;
+        _currentWeapon = _secondaryWeapon;
+        _secondaryWeapon = tempWeapon;
+
+        //TO PLACE ON ANOTHER METHOD PROBABLY
+        switch(_currentWeapon.WeaponType)
+        {
+            case EWeaponType.RIFLE:
+                //SHOW THE AMMO COUNT AND THE MAGAZINE ICON
+                break;
+            case EWeaponType.PISTOL:
+                break;
+            case EWeaponType.SHOTGUN:
+                break;
+        }
+    }
 
     #region Reload & Repack
     public void GunReload()
