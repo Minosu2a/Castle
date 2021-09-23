@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterController : MonoBehaviour
 {
@@ -204,16 +205,21 @@ public class CharacterController : MonoBehaviour
 
     public void AmmoTest()
     {
-        Debug.Log("Test");
+       // Debug.Log("Test");
         Vector2 magazineOffsetmin = UIManager.Instance.UIController.Magazine1Slider.rectTransform.offsetMin;
         Vector2 magazineOffsetmax = UIManager.Instance.UIController.Magazine1Slider.rectTransform.offsetMax;
 
 
         UIManager.Instance.UIController.Magazine1Slider.rectTransform.offsetMin = new Vector2(magazineOffsetmin.x, 
-        Mathf.Lerp(magazineOffsetmax.y, magazineOffsetmin.y , (float)_rifleMagazine[0] / (float)_currentWeapon.MagazineAmmoCount));
+        Mathf.Lerp(-magazineOffsetmax.y, magazineOffsetmin.y , (float)_rifleMagazine[0] / (float)_currentWeapon.MagazineAmmoCount));
 
-        
+        Debug.Log(UIManager.Instance.UIController.Magazine1Slider.rectTransform.offsetMin);
+        Debug.Log((float)_rifleMagazine[0]);
+        Debug.Log((float)_currentWeapon.MagazineAmmoCount);
 
+        Debug.Log(Mathf.Lerp(-magazineOffsetmax.y, magazineOffsetmin.y, (float)_rifleMagazine[0] / (float)_currentWeapon.MagazineAmmoCount));
+
+        //IT IS BECAUSE WE MODIFY THE MAGAZINEOFFSETMIN, BECAUSE OF THIS THE 'a' and 'b' value of the calcul is different everytime. (I think that's why)
     }
 
     public void MagazineUpdate()
@@ -224,8 +230,52 @@ public class CharacterController : MonoBehaviour
 
                 if (_rifleMagazine.Count > 0)
                 {
-                    int maxAmmoInMagazineList = _rifleMagazine.Max();
 
+                    if(_rifleMagazine.Count > 3)
+                    {
+                        UIManager.Instance.UIController.PlusSign.gameObject.SetActive(true);
+                        UIManager.Instance.UIController.MagazineNumber.gameObject.SetActive(true);
+                        UIManager.Instance.UIController.MagazineNumber.text = _rifleMagazine.Count.ToString();
+                    }
+
+                    for(int i = 0; i < _rifleMagazine.Count || i != 3; i++ )
+                    {
+                        int maxAmmoInMagazineList = _rifleMagazine.Max();
+                        int fullestMagazine = _rifleMagazine.IndexOf(maxAmmoInMagazineList);
+                        //We place the first magazine visual feedback
+                        _rifleMagazine.Remove(_rifleMagazine[i]);
+
+                        RawImage magazineIcon = null;
+
+                        switch(i)
+                        {
+                            case 1:
+                                magazineIcon = UIManager.Instance.UIController.Magazine1Slider;
+                                break;
+
+                            case 2:
+                                magazineIcon = UIManager.Instance.UIController.Magazine2Slider;
+                                break;
+
+                            case 3:
+                                magazineIcon = UIManager.Instance.UIController.Magazine3Slider;
+                                break;
+
+                            default:
+                                magazineIcon = UIManager.Instance.UIController.Magazine1Slider;
+                                break;
+                        }
+
+                        Vector2 magazineOffsetmin = magazineIcon.rectTransform.offsetMin;
+                        Vector2 magazineOffsetmax = magazineIcon.rectTransform.offsetMax;
+
+
+                        magazineIcon.rectTransform.offsetMin = new Vector2(magazineOffsetmin.x,
+                        Mathf.Lerp(-magazineOffsetmax.y, magazineOffsetmin.y, (float)_rifleMagazine[0] / (float)_currentWeapon.MagazineAmmoCount));
+
+
+                    }
+                    
 
 
                 }

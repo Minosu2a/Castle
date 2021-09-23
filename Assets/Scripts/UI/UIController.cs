@@ -74,6 +74,30 @@ public class UIController : MonoBehaviour
         }
     }
 
+    public TMP_Text PlusSign
+    {
+        get
+        {
+            return _plusSign;
+        }
+        set
+        {
+            _plusSign = value;
+        }
+    }
+
+    public TMP_Text MagazineNumber
+    {
+        get
+        {
+            return _magazineNumber;
+        }
+        set
+        {
+            _magazineNumber = value;
+        }
+    }
+
     #endregion Property
 
 
