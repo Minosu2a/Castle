@@ -47,6 +47,8 @@ public abstract class Weapon : MonoBehaviour
 
     public EWeaponType WeaponType => _weaponType;
 
+    public int MagazineAmmoCount => _magazineAmmoCount;
+
     public float Firerate
     {
         get

@@ -167,12 +167,12 @@ public class InputManager : Singleton<InputManager>
 
         if (Input.GetKeyUp(_repackAmmoInput))
         {
-
+            CharacterManager.Instance.CharacterController.Repack();
         }
 
         if (Input.GetKeyUp(_gunSwitchInput))
         {
-
+            CharacterManager.Instance.CharacterController.AmmoTest();
         }
     }
 

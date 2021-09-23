@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CharacterController : MonoBehaviour
@@ -201,6 +202,50 @@ public class CharacterController : MonoBehaviour
     }
     #endregion Secondary Click
 
+    public void AmmoTest()
+    {
+        Debug.Log("Test");
+        Vector2 magazineOffsetmin = UIManager.Instance.UIController.Magazine1Slider.rectTransform.offsetMin;
+        Vector2 magazineOffsetmax = UIManager.Instance.UIController.Magazine1Slider.rectTransform.offsetMax;
+
+
+        UIManager.Instance.UIController.Magazine1Slider.rectTransform.offsetMin = new Vector2(magazineOffsetmin.x, 
+        Mathf.Lerp(magazineOffsetmax.y, magazineOffsetmin.y , (float)_rifleMagazine[0] / (float)_currentWeapon.MagazineAmmoCount));
+
+        
+
+    }
+
+    public void MagazineUpdate()
+    {
+        switch (_currentWeapon.WeaponType)
+        {
+            case EWeaponType.RIFLE:
+
+                if (_rifleMagazine.Count > 0)
+                {
+                    int maxAmmoInMagazineList = _rifleMagazine.Max();
+
+
+
+                }
+                else
+                {
+
+                }
+
+                //SHOW THE AMMO COUNT AND THE MAGAZINE ICON
+                break;
+            case EWeaponType.PISTOL:
+
+                break;
+            case EWeaponType.SHOTGUN:
+
+                break;
+        }
+
+    }
+
     public void SecondarySwitch()
     {
         Weapon tempWeapon = _currentWeapon;
@@ -208,16 +253,7 @@ public class CharacterController : MonoBehaviour
         _secondaryWeapon = tempWeapon;
 
         //TO PLACE ON ANOTHER METHOD PROBABLY
-        switch(_currentWeapon.WeaponType)
-        {
-            case EWeaponType.RIFLE:
-                //SHOW THE AMMO COUNT AND THE MAGAZINE ICON
-                break;
-            case EWeaponType.PISTOL:
-                break;
-            case EWeaponType.SHOTGUN:
-                break;
-        }
+       
     }
 
     #region Reload & Repack
@@ -233,7 +269,7 @@ public class CharacterController : MonoBehaviour
 
     public void Repack()
     {
-        
+        UIManager.Instance.UIController.Magazine1Slider.rectTransform.offsetMin = new Vector2(UIManager.Instance.UIController.Magazine1Slider.rectTransform.offsetMin.x, 30);
     }
     #endregion Reload & Repack
 
