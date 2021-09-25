@@ -19,6 +19,11 @@ public class UIController : MonoBehaviour
 
     [SerializeField] private float _bottomValueOfMagazine = 25f;
 
+    [Header("Shotgun Ammunition")]
+    [SerializeField] private TMP_Text _shotgunAmmo = null;
+    [SerializeField] private GameObject _shotgunMiddleBar = null;
+
+
     [Header("Global Ammunition")]
     [SerializeField] private TMP_Text _magazineNumber = null;
     [SerializeField] private TMP_Text _plusSign = null;

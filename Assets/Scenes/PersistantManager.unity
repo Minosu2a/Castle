@@ -1429,6 +1429,7 @@ MonoBehaviour:
   _gunSwitchInput: 9
   _repackAmmoInput: 102
   _timerForFastReloadInput: 0.25
+  _timerForAmmoCheck: 0.65
 --- !u!4 &2089275646
 Transform:
   m_ObjectHideFlags: 0

@@ -21,10 +21,14 @@ public class InputManager : Singleton<InputManager>
 
 
     [SerializeField] private float _timerForFastReloadInput = 0.5f;
+    [SerializeField] private float _timerForAmmoCheck = 0.65f;
+
 
     private float _timeStamp = 0;
     private bool _hasPressedReloadOnce = false;
+    private bool _ammoCheckDone = false;
     private bool _isReloading = false;
+
 
     #endregion Fields
 
@@ -128,7 +132,7 @@ public class InputManager : Singleton<InputManager>
                     else if (Input.GetKeyDown(_reloadInput))
                     {
                         //IN THEORY THE PLAYER IS OUT OF MAGAZINE HERE
-                        Debug.Log("Out of Ammunition");
+                        CharacterManager.Instance.CharacterController.MagazineUpdate();
                     }
                     break;
                 case EWeaponType.RIFLE:
@@ -139,7 +143,7 @@ public class InputManager : Singleton<InputManager>
                     else if (Input.GetKeyDown(_reloadInput))
                     {
                         //IN THEORY THE PLAYER IS OUT OF MAGAZINE HERE
-                        Debug.Log("Out of Ammunition");
+                        CharacterManager.Instance.CharacterController.MagazineUpdate();
                     }
                     break;
                 case EWeaponType.SHOTGUN:
@@ -154,7 +158,7 @@ public class InputManager : Singleton<InputManager>
                     else if (Input.GetKeyDown(_reloadInput))
                     {
                         //IN THEORY THE PLAYER IS OUT OF MAGAZINE HERE
-                        Debug.Log("Out of Ammunition");
+                        CharacterManager.Instance.CharacterController.MagazineUpdate();
                     }
                     break;
             }
@@ -178,7 +182,18 @@ public class InputManager : Singleton<InputManager>
 
     private void ReloadCheck()
     {
-        if (Input.GetKeyDown(_reloadInput) && _hasPressedReloadOnce == false && _isReloading == false) //PRESS RELOAD A FIRST TIME (THE SYSTEM WAIT FOR THE PLAYER TO EITHER : 
+
+        if (Input.GetKey(_reloadInput))
+        {
+            _timeStamp += Time.deltaTime;
+            if (_timeStamp >= _timerForAmmoCheck)   
+            {
+                CharacterManager.Instance.CharacterController.MagazineUpdate();
+                _ammoCheckDone = true;
+                _timeStamp = 0;
+            }
+        }
+        else if (Input.GetKeyUp(_reloadInput) && _hasPressedReloadOnce == false && _isReloading == false && _ammoCheckDone == false) //PRESS RELOAD A FIRST TIME (THE SYSTEM WAIT FOR THE PLAYER TO EITHER : 
         {
             _hasPressedReloadOnce = true;
         }
@@ -199,6 +214,10 @@ public class InputManager : Singleton<InputManager>
                 _timeStamp = 0;
                 _isReloading = true;
             }
+        }
+        else if(_ammoCheckDone == true)
+        {
+            _ammoCheckDone = false;
         }
     }
 

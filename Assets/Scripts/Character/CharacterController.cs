@@ -225,119 +225,117 @@ public class CharacterController : MonoBehaviour
         //It means the solution is to set the offsetMin of the magazine at start or to have a fixed value =/
     }
 
-    public void MagazineUpdate()    //THERE IS FOR SURE A BETTER LOGIC TO THIS BUT IT  TAKE A WHILE TO MAKE IT
+    public void MagazineUpdate()  
     {
+
+        List<int> weaponUsedMagazine = new List<int>();
+
         switch (_currentWeapon.WeaponType)
         {
             case EWeaponType.RIFLE:
-
-                Vector2 currentMagazineMin = UIManager.Instance.UIController.RifleMagazine1Slider.rectTransform.offsetMin;
-                Vector2 currentMagazineMax = UIManager.Instance.UIController.RifleMagazine1Slider.rectTransform.offsetMax;
-
-                UIManager.Instance.UIController.RifleMagazine1Slider.rectTransform.offsetMin = new Vector2(currentMagazineMin.x,
-                Mathf.Lerp(-currentMagazineMax.y, UIManager.Instance.UIController.BottomValueOfMagazine,
-                (float)_currentWeapon.AmmoCount / (float)_currentWeapon.MagazineAmmoCount));
-
-
-
-
-                if (_rifleMagazine.Count > 0)
-                {
-
-                    if (_rifleMagazine.Count > 2)
-                    {
-                        UIManager.Instance.UIController.PlusSign.gameObject.SetActive(true);
-                        UIManager.Instance.UIController.MagazineNumber.gameObject.SetActive(true);
-                        UIManager.Instance.UIController.MagazineNumber.text = (_rifleMagazine.Count +1).ToString();
-
-                    }
-                    else
-                    {
-                        UIManager.Instance.UIController.PlusSign.gameObject.SetActive(false);
-                        UIManager.Instance.UIController.MagazineNumber.gameObject.SetActive(false);
-                    }
-
-                    for(int i = 0; i < _rifleMagazine.Count; i++)
-                    {
-                        Debug.Log("i = " + i + " / Count = " + _rifleMagazine.Count);
-                        if (i == 0)
-                        {
-                            UIManager.Instance.UIController.RifleObj2Magazine.SetActive(true);
-                            UIManager.Instance.UIController.RifleObj3Magazine.SetActive(false);
-
-
-                            int maxAmmoInMagazineList = _rifleMagazine.Max();   //We start by finding what's the fullest magazine
-                            int fullestMagazine = _rifleMagazine.IndexOf(maxAmmoInMagazineList);
-
-
-                            RawImage magazineIcon = UIManager.Instance.UIController.RifleMagazine2Slider; //We tell what magazine to change
-
-                            Vector2 magazineOffsetmin = magazineIcon.rectTransform.offsetMin; //We get the necessary value
-                            Vector2 magazineOffsetmax = magazineIcon.rectTransform.offsetMax;
-
-                            magazineIcon.rectTransform.offsetMin = new Vector2(magazineOffsetmin.x, //We do a bit of math here to correctly setup the magazine color depending on the ammunition count
-                            Mathf.Lerp(-magazineOffsetmax.y, UIManager.Instance.UIController.BottomValueOfMagazine,
-                            (float)_rifleMagazine[fullestMagazine] / (float)_currentWeapon.MagazineAmmoCount));
-
-
-
-                        }
-                        else if (i== 1)
-                        {
-                            UIManager.Instance.UIController.RifleObj3Magazine.SetActive(true);
-
-
-                            Debug.Log("TEST");
-                            UIManager.Instance.UIController.RifleMagazine3Slider.gameObject.SetActive(true);
-
-                            int firstMagazineList = _rifleMagazine.Max();   //Same system but with the third magazine this time
-                            int firstMagazineIndex = _rifleMagazine.IndexOf(firstMagazineList);
-
-                            int temporarySecondMagazine = firstMagazineList; //We place this magazine ammo count in a temporary variable
-                            Debug.Log(firstMagazineIndex);
-                            _rifleMagazine.RemoveAt(firstMagazineIndex); //We remove it from the list to be able to find the fullest second magazine, dw we are adding it later
-
-
-
-                            int maxAmmoInMagazineList = _rifleMagazine.Max();   //This time we do search the second highest magazine
-                            int fullestMagazine = _rifleMagazine.IndexOf(maxAmmoInMagazineList);
-
-
-
-                            RawImage magazineIcon = UIManager.Instance.UIController.RifleMagazine3Slider;
-
-                            Vector2 magazineOffsetmin = magazineIcon.rectTransform.offsetMin;
-                            Vector2 magazineOffsetmax = magazineIcon.rectTransform.offsetMax;
-
-                            magazineIcon.rectTransform.offsetMin = new Vector2(magazineOffsetmin.x,
-                            Mathf.Lerp(-magazineOffsetmax.y, UIManager.Instance.UIController.BottomValueOfMagazine,
-                            (float)_rifleMagazine[fullestMagazine] / (float)_currentWeapon.MagazineAmmoCount));
-
-
-                            _rifleMagazine.Add(temporarySecondMagazine);
-                        }
-
-                    }
-
-             
-                }
-                else
-                {
-                    UIManager.Instance.UIController.PlusSign.gameObject.SetActive(false);
-                    UIManager.Instance.UIController.MagazineNumber.gameObject.SetActive(false);
-                    UIManager.Instance.UIController.RifleObj2Magazine.SetActive(false);
-                    UIManager.Instance.UIController.RifleObj3Magazine.SetActive(false);
-
-                }
-
-                //SHOW THE AMMO COUNT AND THE MAGAZINE ICON
+                weaponUsedMagazine = _rifleMagazine;
                 break;
             case EWeaponType.PISTOL:
-
+                weaponUsedMagazine = _pistolMagazine;
                 break;
             case EWeaponType.SHOTGUN:
 
                 break;
+
+        }
+
+
+        Vector2 currentMagazineMin = UIManager.Instance.UIController.RifleMagazine1Slider.rectTransform.offsetMin;
+        Vector2 currentMagazineMax = UIManager.Instance.UIController.RifleMagazine1Slider.rectTransform.offsetMax;
+
+        UIManager.Instance.UIController.RifleMagazine1Slider.rectTransform.offsetMin = new Vector2(currentMagazineMin.x,
+        Mathf.Lerp(-currentMagazineMax.y, UIManager.Instance.UIController.BottomValueOfMagazine,
+        (float)_currentWeapon.AmmoCount / (float)_currentWeapon.MagazineAmmoCount));
+
+
+        if (weaponUsedMagazine.Count > 0)
+        {
+
+            if (weaponUsedMagazine.Count > 2)
+            {
+                UIManager.Instance.UIController.PlusSign.gameObject.SetActive(true);
+                UIManager.Instance.UIController.MagazineNumber.gameObject.SetActive(true);
+                UIManager.Instance.UIController.MagazineNumber.text = (weaponUsedMagazine.Count + 1).ToString();
+
+            }
+            else
+            {
+                UIManager.Instance.UIController.PlusSign.gameObject.SetActive(false);
+                UIManager.Instance.UIController.MagazineNumber.gameObject.SetActive(false);
+            }
+
+            for (int i = 0; i < weaponUsedMagazine.Count; i++)
+            {
+                Debug.Log("i = " + i + " / Count = " + weaponUsedMagazine.Count);
+                if (i == 0)
+                {
+                    UIManager.Instance.UIController.RifleObj2Magazine.SetActive(true);
+                    UIManager.Instance.UIController.RifleObj3Magazine.SetActive(false);
+
+
+                    int maxAmmoInMagazineList = weaponUsedMagazine.Max();   //We start by finding what's the fullest magazine
+                    int fullestMagazine = weaponUsedMagazine.IndexOf(maxAmmoInMagazineList);
+
+
+                    RawImage magazineIcon = UIManager.Instance.UIController.RifleMagazine2Slider; //We tell what magazine to change
+
+                    Vector2 magazineOffsetmin = magazineIcon.rectTransform.offsetMin; //We get the necessary value
+                    Vector2 magazineOffsetmax = magazineIcon.rectTransform.offsetMax;
+
+                    magazineIcon.rectTransform.offsetMin = new Vector2(magazineOffsetmin.x, //We do a bit of math here to correctly setup the magazine color depending on the ammunition count
+                    Mathf.Lerp(-magazineOffsetmax.y, UIManager.Instance.UIController.BottomValueOfMagazine,
+                    (float)weaponUsedMagazine[fullestMagazine] / (float)_currentWeapon.MagazineAmmoCount));
+
+
+
+                }
+                else if (i == 1)
+                {
+                    UIManager.Instance.UIController.RifleObj3Magazine.SetActive(true);
+
+
+                    UIManager.Instance.UIController.RifleMagazine3Slider.gameObject.SetActive(true);
+
+                    int firstMagazineList = weaponUsedMagazine.Max();   //Same system but with the third magazine this time
+                    int firstMagazineIndex = weaponUsedMagazine.IndexOf(firstMagazineList);
+
+                    int temporarySecondMagazine = firstMagazineList; //We place this magazine ammo count in a temporary variable
+                    weaponUsedMagazine.RemoveAt(firstMagazineIndex); //We remove it from the list to be able to find the fullest second magazine, dw we are adding it later
+
+
+
+                    int maxAmmoInMagazineList = weaponUsedMagazine.Max();   //This time we do search the second highest magazine
+                    int fullestMagazine = weaponUsedMagazine.IndexOf(maxAmmoInMagazineList);
+
+
+
+                    RawImage magazineIcon = UIManager.Instance.UIController.RifleMagazine3Slider;
+
+                    Vector2 magazineOffsetmin = magazineIcon.rectTransform.offsetMin;
+                    Vector2 magazineOffsetmax = magazineIcon.rectTransform.offsetMax;
+
+                    magazineIcon.rectTransform.offsetMin = new Vector2(magazineOffsetmin.x,
+                    Mathf.Lerp(-magazineOffsetmax.y, UIManager.Instance.UIController.BottomValueOfMagazine,
+                    (float)weaponUsedMagazine[fullestMagazine] / (float)_currentWeapon.MagazineAmmoCount));
+
+
+                    weaponUsedMagazine.Add(temporarySecondMagazine);
+                }
+
+            }
+
+        }
+        else
+        {
+            UIManager.Instance.UIController.PlusSign.gameObject.SetActive(false);
+            UIManager.Instance.UIController.MagazineNumber.gameObject.SetActive(false);
+            UIManager.Instance.UIController.RifleObj2Magazine.SetActive(false);
+            UIManager.Instance.UIController.RifleObj3Magazine.SetActive(false);
         }
 
     }

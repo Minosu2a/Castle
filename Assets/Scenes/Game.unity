@@ -954,7 +954,7 @@ MonoBehaviour:
   _rb: {fileID: 167234569}
   _walkSpeed: 7
   _sprintSpeed: 12
-  _currentWeapon: {fileID: 177209372}
+  _currentWeapon: {fileID: 1140644849}
   _secondaryWeapon: {fileID: 1140644849}
   _aimLine: {fileID: 54791568}
   _pistolMagazine: 0900000000000000
