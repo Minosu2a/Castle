@@ -10,11 +10,16 @@ public class UIController : MonoBehaviour
     #region Fields
     [SerializeField] private TMP_Text _ammoText = null; //Debug
 
-    [Header("Ammunition")]
-    [SerializeField] private RawImage _magazine1Slider = null;
-    [SerializeField] private RawImage _magazine2Slider = null;
-    [SerializeField] private RawImage _magazine3Slider = null;
+    [Header("Rifle Ammunition")]
+    [SerializeField] private RawImage _rifleMagazine1Slider = null;
+    [SerializeField] private RawImage _rifleMagazine2Slider = null;
+    [SerializeField] private RawImage _rifleMagazine3Slider = null;
+    [SerializeField] private GameObject _rifleObj2Magazine = null;
+    [SerializeField] private GameObject _rifleObj3Magazine = null;
 
+    [SerializeField] private float _bottomValueOfMagazine = 25f;
+
+    [Header("Global Ammunition")]
     [SerializeField] private TMP_Text _magazineNumber = null;
     [SerializeField] private TMP_Text _plusSign = null;
     //[SerializeField] private TMP_Text _shotgunAmmo = null;
@@ -25,6 +30,7 @@ public class UIController : MonoBehaviour
 
     #region Property
 
+    public float BottomValueOfMagazine => _bottomValueOfMagazine;
 
     public TMP_Text AmmoText
     {
@@ -38,39 +44,64 @@ public class UIController : MonoBehaviour
         }
     }
 
-    public RawImage Magazine1Slider
+    public GameObject RifleObj2Magazine
     {
         get
         {
-            return _magazine1Slider;
+            return _rifleObj2Magazine;
         }
         set
         {
-            _magazine1Slider = value;
+            _rifleObj2Magazine = value;
         }
     }
 
-    public RawImage Magazine2Slider
+    public GameObject RifleObj3Magazine
     {
         get
         {
-            return _magazine2Slider;
+            return _rifleObj3Magazine;
         }
         set
         {
-            _magazine2Slider = value;
+            _rifleObj3Magazine = value;
         }
     }
 
-    public RawImage Magazine3Slider
+
+    public RawImage RifleMagazine1Slider
     {
         get
         {
-            return _magazine3Slider;
+            return _rifleMagazine1Slider;
         }
         set
         {
-            _magazine3Slider = value;
+            _rifleMagazine1Slider = value;
+        }
+    }
+
+    public RawImage RifleMagazine2Slider
+    {
+        get
+        {
+            return _rifleMagazine2Slider;
+        }
+        set
+        {
+            _rifleMagazine2Slider = value;
+        }
+    }
+
+    public RawImage RifleMagazine3Slider
+    {
+        get
+        {
+            return _rifleMagazine3Slider;
+        }
+        set
+        {
+            _rifleMagazine3Slider = value;
         }
     }
 
@@ -106,6 +137,12 @@ public class UIController : MonoBehaviour
     {
         UIManager.Instance.UIController = this;    
     }
+
+    private void Start()
+    {
+        _bottomValueOfMagazine = _rifleMagazine1Slider.rectTransform.offsetMin.y;
+    }
+
 
     public void TooglePause()
     {

@@ -167,7 +167,7 @@ public class InputManager : Singleton<InputManager>
 
         if (Input.GetKeyUp(_repackAmmoInput))
         {
-            CharacterManager.Instance.CharacterController.AmmoTest();
+            CharacterManager.Instance.CharacterController.MagazineUpdate();
         }
 
         if (Input.GetKeyUp(_gunSwitchInput))

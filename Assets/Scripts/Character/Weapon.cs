@@ -49,6 +49,8 @@ public abstract class Weapon : MonoBehaviour
 
     public int MagazineAmmoCount => _magazineAmmoCount;
 
+    public int AmmoCount => _ammoCount;
+
     public float Firerate
     {
         get
@@ -169,7 +171,8 @@ public abstract class Weapon : MonoBehaviour
             {
                 CharacterManager.Instance.CharacterController.PistolMagazine.Add(oldAmmoCount); //WE ADD THE OLD MAGAZINE TO THE MAGAZINE LIST
             }
-        
+
+            CharacterManager.Instance.CharacterController.MagazineUpdate();
     }
 
     protected virtual IEnumerator ReloadDelay(float reloadTime)

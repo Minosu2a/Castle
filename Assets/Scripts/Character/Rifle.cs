@@ -67,6 +67,8 @@ public class Rifle : Weapon
             CharacterManager.Instance.CharacterController.RifleMagazine.Add(oldAmmoCount); //WE ADD THE OLD MAGAZINE TO THE MAGAZINE LIST
         }
 
+        CharacterManager.Instance.CharacterController.MagazineUpdate();
+
     }
 
 
