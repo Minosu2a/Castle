@@ -153,6 +153,7 @@ public class InputManager : Singleton<InputManager>
                         {
                             CharacterManager.Instance.CharacterController.GunReload();
                             _isReloading = true;
+                            CharacterManager.Instance.CharacterController.MagazineUpdate();
                         }
                     }
                     else if (Input.GetKeyDown(_reloadInput))

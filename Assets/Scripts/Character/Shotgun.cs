@@ -40,7 +40,7 @@ public class Shotgun : Weapon
             _ammoCount++;
             CharacterManager.Instance.CharacterController.ShotgunAmmo--;
 
-            UIManager.Instance.UIController.AmmoText.text = _ammoCount.ToString(); //UPDATE THE AMMO ACCOUNT ON THE UI
+            UIManager.Instance.UIController.MagazineNumber.text = _ammoCount.ToString(); //UPDATE THE AMMO ACCOUNT ON THE UI
         }
 
         //DO THE SATSFYING 'CHOCK CHOCK' SOUND TO LET THE PLAYER KNOW HE IS GOOD TO KILL SOME FREAKS AGAIN

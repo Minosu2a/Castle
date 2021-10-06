@@ -205,46 +205,36 @@ public class CharacterController : MonoBehaviour
     }
     #endregion Secondary Click
 
-    public void AmmoTest() //THIS SYSTEM HIGHLY NEED A REWORK SINCE IT WONT WORK CORRECTLY FOR EVERY GUNS
-    {
-       // Debug.Log("Test");
-        Vector2 magazineOffsetmin = UIManager.Instance.UIController.RifleMagazine1Slider.rectTransform.offsetMin;
-        Vector2 magazineOffsetmax = UIManager.Instance.UIController.RifleMagazine1Slider.rectTransform.offsetMax;
-
-
-        UIManager.Instance.UIController.RifleMagazine1Slider.rectTransform.offsetMin = new Vector2(magazineOffsetmin.x, 
-        Mathf.Lerp(magazineOffsetmax.y, UIManager.Instance.UIController.BottomValueOfMagazine, (float)_rifleMagazine[0] / (float)_currentWeapon.MagazineAmmoCount));
-
-        Debug.Log(UIManager.Instance.UIController.RifleMagazine1Slider.rectTransform.offsetMin);
-        Debug.Log((float)_rifleMagazine[0]);
-        Debug.Log((float)_currentWeapon.MagazineAmmoCount);
-
-        Debug.Log(Mathf.Lerp(magazineOffsetmax.y, UIManager.Instance.UIController.BottomValueOfMagazine, (float)_rifleMagazine[0] / (float)_currentWeapon.MagazineAmmoCount));
-
-        //IT IS BECAUSE WE MODIFY THE MAGAZINEOFFSETMIN, BECAUSE OF THIS THE 'a' and 'b' value of the calcul is different everytime. 
-        //It means the solution is to set the offsetMin of the magazine at start or to have a fixed value =/
-    }
 
     public void MagazineUpdate()  
     {
 
-        List<int> weaponUsedMagazine = new List<int>();
+        List<int> temporaryUsedMagazine = new List<int>();
 
         switch (_currentWeapon.WeaponType)
         {
             case EWeaponType.RIFLE:
-                weaponUsedMagazine = _rifleMagazine;
+                temporaryUsedMagazine = _rifleMagazine;
+                MagazineVisualFeedback(temporaryUsedMagazine);
                 break;
             case EWeaponType.PISTOL:
-                weaponUsedMagazine = _pistolMagazine;
+                temporaryUsedMagazine = _pistolMagazine;
+                MagazineVisualFeedback(temporaryUsedMagazine);
                 break;
             case EWeaponType.SHOTGUN:
-
+                UIManager.Instance.UIController.ShotgunMiddleBar.SetActive(true);
+                UIManager.Instance.UIController.ShotgunAmmo.gameObject.SetActive(true);
+                UIManager.Instance.UIController.ShotgunAmmo.text = _shotgunAmmo.ToString();
+                UIManager.Instance.UIController.MagazineNumber.text = _currentWeapon.AmmoCount.ToString();
                 break;
 
         }
 
 
+    }
+
+    private void MagazineVisualFeedback(List<int> weaponUsedMagazine)
+    {
         Vector2 currentMagazineMin = UIManager.Instance.UIController.RifleMagazine1Slider.rectTransform.offsetMin;
         Vector2 currentMagazineMax = UIManager.Instance.UIController.RifleMagazine1Slider.rectTransform.offsetMax;
 
@@ -337,7 +327,6 @@ public class CharacterController : MonoBehaviour
             UIManager.Instance.UIController.RifleObj2Magazine.SetActive(false);
             UIManager.Instance.UIController.RifleObj3Magazine.SetActive(false);
         }
-
     }
 
     public void SecondarySwitch()

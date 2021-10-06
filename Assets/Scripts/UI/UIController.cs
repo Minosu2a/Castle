@@ -49,6 +49,30 @@ public class UIController : MonoBehaviour
         }
     }
 
+    public GameObject ShotgunMiddleBar
+    {
+        get
+        {
+            return _shotgunMiddleBar;
+        }
+        set
+        {
+            _shotgunMiddleBar = value;
+        }
+    }
+
+    public TMP_Text ShotgunAmmo
+    {
+        get
+        {
+            return _shotgunAmmo;
+        }
+        set
+        {
+            _shotgunAmmo = value;
+        }
+    }
+
     public GameObject RifleObj2Magazine
     {
         get
