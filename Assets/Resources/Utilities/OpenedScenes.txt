@@ -1,1 +1,2 @@
+Assets/Scenes/PersistantManager.unity
 Assets/Scenes/Game.unity

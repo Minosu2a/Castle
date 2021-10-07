@@ -120,8 +120,11 @@ public class CharacterController : MonoBehaviour
         CharacterManager.Instance.CharacterController = this;
 
         _pistolMagazine = new List<int>();
-        _rifleMagazine = new List<int>();    
-        
+        _rifleMagazine = new List<int>();
+        _rifleMagazine.Add(30);
+        _rifleMagazine.Add(30);
+        _rifleMagazine.Add(30);
+
 
     }
 
@@ -155,6 +158,14 @@ public class CharacterController : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision other)
+    {
+
+        if (other.gameObject.tag == "EnemiLogic")
+        {
+            Debug.Log("Take Damage");
+        }
+    }
 
     private void Look()
     {
@@ -261,7 +272,6 @@ public class CharacterController : MonoBehaviour
 
             for (int i = 0; i < weaponUsedMagazine.Count; i++)
             {
-                Debug.Log("i = " + i + " / Count = " + weaponUsedMagazine.Count);
                 if (i == 0)
                 {
                     UIManager.Instance.UIController.RifleObj2Magazine.SetActive(true);

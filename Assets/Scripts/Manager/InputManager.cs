@@ -24,7 +24,9 @@ public class InputManager : Singleton<InputManager>
     [SerializeField] private float _timerForAmmoCheck = 0.65f;
 
 
-    private float _timeStamp = 0;
+    private float _ammoCheckTimeStamp = 0;
+    private float _fastReloadTimeStamp = 0;
+
     private bool _hasPressedReloadOnce = false;
     private bool _ammoCheckDone = false;
     private bool _isReloading = false;
@@ -186,33 +188,35 @@ public class InputManager : Singleton<InputManager>
 
         if (Input.GetKey(_reloadInput))
         {
-            _timeStamp += Time.deltaTime;
-            if (_timeStamp >= _timerForAmmoCheck)   
+            _ammoCheckTimeStamp += Time.deltaTime;
+            if (_ammoCheckTimeStamp >= _timerForAmmoCheck)   
             {
                 CharacterManager.Instance.CharacterController.MagazineUpdate();
                 _ammoCheckDone = true;
-                _timeStamp = 0;
+                _ammoCheckTimeStamp = 0;
             }
         }
         else if (Input.GetKeyUp(_reloadInput) && _hasPressedReloadOnce == false && _isReloading == false && _ammoCheckDone == false) //PRESS RELOAD A FIRST TIME (THE SYSTEM WAIT FOR THE PLAYER TO EITHER : 
         {
             _hasPressedReloadOnce = true;
         }
-        else if (Input.GetKeyDown(_reloadInput) && _hasPressedReloadOnce == true) //1 - PRESS R AGAIN TO TRIGGER THE FAST RELOAD
+        else if (Input.GetKeyUp(_reloadInput) && _hasPressedReloadOnce == true) //1 - PRESS R AGAIN TO TRIGGER THE FAST RELOAD
         {
+
             CharacterManager.Instance.CharacterController.FastGunReload();
             _hasPressedReloadOnce = false;
-            _timeStamp = 0;
+            _fastReloadTimeStamp = 0;
             _isReloading = true;
         }
         else if (_hasPressedReloadOnce == true)
         {
-            _timeStamp += Time.deltaTime;
-            if (_timeStamp >= _timerForFastReloadInput)   //2 - WAIT A FEW (Depending on _timerForFastReloadInput) AND RELOAD IF THE TIMER HAS RUN OUT (SYSTEM STOP TO WAIT TO SEE IF THE PLAYER IS GOING TO DO A FAST RELOAD INSTEAD)
+            _fastReloadTimeStamp += Time.deltaTime;
+            if (_fastReloadTimeStamp >= _timerForFastReloadInput)   //2 - WAIT A FEW (Depending on _timerForFastReloadInput) AND RELOAD IF THE TIMER HAS RUN OUT (SYSTEM STOP TO WAIT TO SEE IF THE PLAYER IS GOING TO DO A FAST RELOAD INSTEAD)
             {
+
                 CharacterManager.Instance.CharacterController.GunReload();
                 _hasPressedReloadOnce = false;
-                _timeStamp = 0;
+                _fastReloadTimeStamp = 0;
                 _isReloading = true;
             }
         }
