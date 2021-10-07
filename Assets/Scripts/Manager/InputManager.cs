@@ -181,7 +181,7 @@ public class InputManager : Singleton<InputManager>
         }
     }
 
-    private void ReloadCheck()
+    private void ReloadCheck()  //FAST RELOAD ISNT WORKING ANYMORE 
     {
 
         if (Input.GetKey(_reloadInput))

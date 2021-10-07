@@ -40,7 +40,7 @@ public class Bullet : MonoBehaviour
     {
         if(other.tag == "Enemi")
         {
-            other.GetComponent<Zombie>().TakeDamage(1);
+            other.GetComponentInParent<Zombie>().TakeDamage(1);
             Destroy(this.gameObject);
         }
         else if(other.tag == "Wall")
