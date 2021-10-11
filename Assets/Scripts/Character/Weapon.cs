@@ -39,6 +39,10 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected SoundData _soundReloadFast = null;
     [SerializeField] protected SoundData[] _soundFire = null;
 
+    [Header("Polish")]
+    [SerializeField] protected Light _muzzleFlash = null;
+    [SerializeField] protected float _muzzleFlashTime = 0f;
+    protected bool _muzzleFlashActive = false;
 
     #endregion Fields
 
