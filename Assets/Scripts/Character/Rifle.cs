@@ -6,7 +6,6 @@ using UnityEngine;
 public class Rifle : Weapon
 {
     private float _timeStamp = 0;
-    private float _muzzleTimeStamp = 0;
 
 
     protected override void Start()
@@ -41,9 +40,7 @@ public class Rifle : Weapon
 
             UIManager.Instance.UIController.AmmoText.text = _ammoCount.ToString(); //UPDATE THE AMMO ACCOUNT ON THE UI
 
-            _muzzleFlash.gameObject.SetActive(true);
-
-            _muzzleFlashActive = true;
+            MuzzleFlashOn();
         }
     }
 
@@ -90,16 +87,9 @@ public class Rifle : Weapon
             }
         }
 
-        if(_muzzleFlashActive == true)
+        if (_muzzleFlashActive == true)
         {
-            _muzzleTimeStamp += Time.deltaTime;
-
-            if (_muzzleTimeStamp >= _muzzleFlashTime)
-            {
-                _muzzleFlash.gameObject.SetActive(false);
-                _muzzleTimeStamp = 0;
-                _muzzleFlashActive = false;
-            }
+            MuzzleFlashOff();
         }
 
 

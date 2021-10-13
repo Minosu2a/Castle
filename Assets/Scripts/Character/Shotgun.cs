@@ -21,6 +21,7 @@ public class Shotgun : Weapon
             Bullet bulletClone = Instantiate(_bullet, _projectileStartPos.position, _projectileStartPos.rotation, _container); //CREATE THE BULLET
             bulletClone.Init(transform.forward, _weaponSpread); //PLAYER IS NOT AIMING SO THE WEAPON SPREAD IS NOT DIVIDED BY ACCURACY FACTOR (_aimDivider)
         }
+
     }
 
     public override void Secondary()

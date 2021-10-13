@@ -43,6 +43,7 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected Light _muzzleFlash = null;
     [SerializeField] protected float _muzzleFlashTime = 0f;
     protected bool _muzzleFlashActive = false;
+    private float _muzzleTimeStamp = 0;
 
     #endregion Fields
 
@@ -93,6 +94,8 @@ public abstract class Weapon : MonoBehaviour
         }
         else if(_triggerReleased == true) //IF THE CHARACTER FINGER HAS ALREADY PULLED THE TRIGGER (IF NOT HE HAS TO REALEASE IT TO BE ABLE TO FIRE AGAIN)
         {
+            MuzzleFlashOn();
+
             _triggerReleased = false;
 
             ProjectileSpawn();
@@ -181,7 +184,17 @@ public abstract class Weapon : MonoBehaviour
 
     protected virtual IEnumerator ReloadDelay(float reloadTime)
     {
-        AudioManager.Instance.Start2DSound(_soundReloadNormal.name);
+
+        if (reloadTime == _reloadFastTime)
+        {
+            AudioManager.Instance.Start2DSound(_soundReloadFast.name);
+            AudioManager.Instance.Start2DSound("S_ReloadVoice");
+        }
+        else
+        {
+            AudioManager.Instance.Start2DSound(_soundReloadNormal.name);
+        }
+
         yield return new WaitForSeconds(reloadTime);
         Debug.Log("Reloading Finished after : " + reloadTime + " seconds");
 
@@ -212,10 +225,32 @@ public abstract class Weapon : MonoBehaviour
 
     protected virtual void Update()
     {
-
+        if (_muzzleFlashActive == true)
+        {
+            MuzzleFlashOff();
+        }
     }
 
- 
+    protected virtual void MuzzleFlashOn()
+    {
+        _muzzleFlash.gameObject.SetActive(true);
+
+        _muzzleFlashActive = true;
+    }
+
+    protected virtual void MuzzleFlashOff()
+    {
+        
+            _muzzleTimeStamp += Time.deltaTime;
+
+            if (_muzzleTimeStamp >= _muzzleFlashTime)
+            {
+                _muzzleFlash.gameObject.SetActive(false);
+                _muzzleTimeStamp = 0;
+                _muzzleFlashActive = false;
+            }
+        
+    }
     #endregion Methods
 
 }

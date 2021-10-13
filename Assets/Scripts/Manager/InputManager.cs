@@ -15,7 +15,9 @@ public class InputManager : Singleton<InputManager>
     [SerializeField] private KeyCode _mainFireInput = KeyCode.Mouse0;
     [SerializeField] private KeyCode _secondFireInput = KeyCode.Mouse1;
     [SerializeField] private KeyCode _reloadInput = KeyCode.R;
-    [SerializeField] private KeyCode _gunSwitchInput = KeyCode.Tab;
+    [SerializeField] private KeyCode _secondaryGunSwitchInput = KeyCode.Tab;
+    [SerializeField] private KeyCode _primaryGunSwitchInput = KeyCode.A;
+
     [SerializeField] private KeyCode _repackAmmoInput = KeyCode.F;
 
 
@@ -177,9 +179,14 @@ public class InputManager : Singleton<InputManager>
             CharacterManager.Instance.CharacterController.MagazineUpdate();
         }
 
-        if (Input.GetKeyUp(_gunSwitchInput))
+        if (Input.GetKeyUp(_secondaryGunSwitchInput))
         {
-            CharacterManager.Instance.CharacterController.MagazineUpdate();
+            CharacterManager.Instance.CharacterController.SecondarySwitch();
+        }
+
+        if (Input.GetKeyUp(_primaryGunSwitchInput))
+        {
+            CharacterManager.Instance.CharacterController.SecondarySwitch();
         }
     }
 

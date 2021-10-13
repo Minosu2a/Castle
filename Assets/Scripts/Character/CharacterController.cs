@@ -339,15 +339,28 @@ public class CharacterController : MonoBehaviour
         }
     }
 
+    #region WeaponSwitch
+    public void PrimarySwitch()
+    {
+       
+    }
+
     public void SecondarySwitch()
     {
         Weapon tempWeapon = _currentWeapon;
+
+        _currentWeapon.gameObject.SetActive(false); //Desactivate the current Weapon
+
         _currentWeapon = _secondaryWeapon;
+
         _secondaryWeapon = tempWeapon;
 
-        //TO PLACE ON ANOTHER METHOD PROBABLY
-       
+        _currentWeapon.gameObject.SetActive(true); //Activate the new weapon
+
+        MagazineUpdate();
+
     }
+    #endregion WeaponSwitch
 
     #region Reload & Repack
     public void GunReload()
