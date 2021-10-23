@@ -58,7 +58,6 @@ public class Zombie : MonoBehaviour
         if(_behaviour != EZombieModeType.HUNTER)
         {
         _behaviour = EZombieModeType.HUNTER;
-        _characterPos = CharacterManager.Instance.CharacterController.transform;
         AudioManager.Instance.Start3DSound("S_EvilYell", this.transform);
         AudioManager.Instance.StopSound(ESoundType.REPETITIVE3D, "S_EvilBreathing");
         }
@@ -81,7 +80,7 @@ public class Zombie : MonoBehaviour
                 //SOME AUDIO IN LOOP OR SOMETHING
                     break;
                 case EZombieModeType.HUNTER:
-                    _navMesh.SetDestination(_characterPos.position);
+                    _navMesh.SetDestination(CharacterManager.Instance.CharacterController.transform.position);
                   /*  _dir = _characterPos.position - transform.position;
                     _rb.velocity = _dir.normalized * _movespeed;
                     transform.forward = _dir;*/
