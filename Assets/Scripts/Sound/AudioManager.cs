@@ -404,6 +404,7 @@ public class AudioManager : Singleton<AudioManager>
         if (_soundData.ContainsKey(key) == false)   
         {
             Debug.LogError("Fnct StartSound2D : Specified key not found for the audio file");
+            return;
         }
         else if (_soundData[key].Loop == true) //Verify if the Soundata is set to loop, if it's not the case use PlayAudioOneShot instead
         {

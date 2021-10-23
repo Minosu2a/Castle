@@ -241,6 +241,9 @@ public class CharacterController : MonoBehaviour
 
         }
 
+        //TRIGGER ONLY ONCE OR ONLY WHEN YOU DO THE HOLD R 
+        AudioManager.Instance.Start2DSound("S_MagazineCheck");
+
 
     }
 
