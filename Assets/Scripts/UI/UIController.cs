@@ -14,6 +14,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private RawImage _rifleMagazine1Slider = null;
     [SerializeField] private RawImage _rifleMagazine2Slider = null;
     [SerializeField] private RawImage _rifleMagazine3Slider = null;
+    [SerializeField] private GameObject _rifleObj1Magazine = null;
     [SerializeField] private GameObject _rifleObj2Magazine = null;
     [SerializeField] private GameObject _rifleObj3Magazine = null;
 
@@ -29,8 +30,10 @@ public class UIController : MonoBehaviour
     [SerializeField] private TMP_Text _plusSign = null;
     //[SerializeField] private TMP_Text _shotgunAmmo = null;
 
-
-
+    private float _timeStamp = 0f;
+    private bool _needVisual = true;
+    [Header("Other")]
+    [SerializeField] private float _timerToHideVisual = 1.5f;
     #endregion Fields
 
     #region Property
@@ -73,10 +76,24 @@ public class UIController : MonoBehaviour
         }
     }
 
+    public GameObject RifleObj1Magazine
+    {
+        get
+        {
+            _needVisual = true;
+            return _rifleObj1Magazine;
+        }
+        set
+        {
+            _rifleObj1Magazine = value;
+        }
+    }
+
     public GameObject RifleObj2Magazine
     {
         get
         {
+            _needVisual = true;
             return _rifleObj2Magazine;
         }
         set
@@ -89,6 +106,7 @@ public class UIController : MonoBehaviour
     {
         get
         {
+            _needVisual = true;
             return _rifleObj3Magazine;
         }
         set
@@ -107,6 +125,7 @@ public class UIController : MonoBehaviour
         set
         {
             _rifleMagazine1Slider = value;
+            _needVisual = true;
         }
     }
 
@@ -119,6 +138,7 @@ public class UIController : MonoBehaviour
         set
         {
             _rifleMagazine2Slider = value;
+            _needVisual = true;
         }
     }
 
@@ -131,6 +151,7 @@ public class UIController : MonoBehaviour
         set
         {
             _rifleMagazine3Slider = value;
+            _needVisual = true;
         }
     }
 
@@ -185,6 +206,29 @@ public class UIController : MonoBehaviour
 
     private void Update()
     {
+        if(_needVisual == true)
+        {
+            _timeStamp += Time.deltaTime;
+
+            if(_timeStamp >= _timerToHideVisual)
+            {
+                _needVisual = false;
+                HideMagazineInfo();
+                _timeStamp = 0f;
+            }
+        }
+    }
+
+    private void HideMagazineInfo()
+    {
+            _rifleObj1Magazine.SetActive(false);
+            _rifleObj2Magazine.SetActive(false);
+            _rifleObj3Magazine.SetActive(false);
+            _rifleMagazine3Slider.gameObject.SetActive(false);
+            _plusSign.gameObject.SetActive(false);
+            _magazineNumber.gameObject.SetActive(false);
+            _shotgunMiddleBar.SetActive(false);
+            _shotgunAmmo.gameObject.SetActive(false);
 
     }
     #endregion Methods

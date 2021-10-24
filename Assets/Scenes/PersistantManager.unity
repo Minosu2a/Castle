@@ -423,6 +423,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a87188041ef1d324590c94d8529e585c, type: 2}
   - {fileID: 11400000, guid: f211e20ae427e704095bbf126595f7b1, type: 2}
   - {fileID: 11400000, guid: a7ea98d5d360d5a43ac29152624d368e, type: 2}
+  - {fileID: 11400000, guid: f670e27617d7e054698f444c706b4b6b, type: 2}
+  - {fileID: 11400000, guid: 219ebfc4867c1d249af490214a33b18f, type: 2}
+  - {fileID: 11400000, guid: 9372a9219e97c4c4ab8e1f794ea8c473, type: 2}
+  - {fileID: 11400000, guid: b9c16c987f6cde943bcdbfcf541807f4, type: 2}
   _2DSoundSource: {fileID: 7820365783914371624, guid: 5e63adde1124d8949bb7215b958047e3, type: 3}
   _3DSoundSource: {fileID: 7820365783914371624, guid: 721b1b331756fcf4aaf705f8a6cfc23c, type: 3}
   _2DRepetitiveSoundSource: {fileID: 7820365783914371624, guid: d96de18f469ed3545a62e2a8ec48a22d, type: 3}

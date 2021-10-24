@@ -198,6 +198,7 @@ public class InputManager : Singleton<InputManager>
             _ammoCheckTimeStamp += Time.deltaTime;
             if (_ammoCheckTimeStamp >= _timerForAmmoCheck)   
             {
+                AudioManager.Instance.Start2DSound("S_MagazineCheck");
                 CharacterManager.Instance.CharacterController.MagazineUpdate();
                 _ammoCheckDone = true;
                 _ammoCheckTimeStamp = 0;

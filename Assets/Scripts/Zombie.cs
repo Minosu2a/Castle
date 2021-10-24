@@ -99,8 +99,10 @@ public class Zombie : MonoBehaviour
     public void TakeDamage(int damage)
     {
         _hp = _hp - damage;
+        AudioManager.Instance.Start3DSound("S_ImpactBody", transform);
+        ZombieDamageSound();
 
-        if(_hp <= 0)
+        if (_hp <= 0)
         {
             Death();
         }
@@ -118,5 +120,22 @@ public class Zombie : MonoBehaviour
         _navMesh.speed = _damagedMovespeed;
         yield return new WaitForSeconds(delayTime);
         _navMesh.speed = _movespeed;
+    }
+
+    private void ZombieDamageSound()
+    {
+        int random = Random.Range(1, 3);
+        switch(random)
+        {
+            case 1:
+                AudioManager.Instance.Start3DSound("S_DamageZombie", transform);
+                break;
+            case 2:
+                AudioManager.Instance.Start3DSound("S_DamageZombie2", transform);
+                break;
+            case 3:
+                AudioManager.Instance.Start3DSound("S_DamageZombie3", transform);
+                break;
+        }
     }
 }

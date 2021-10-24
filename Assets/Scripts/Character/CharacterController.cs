@@ -241,8 +241,6 @@ public class CharacterController : MonoBehaviour
 
         }
 
-        //TRIGGER ONLY ONCE OR ONLY WHEN YOU DO THE HOLD R 
-        AudioManager.Instance.Start2DSound("S_MagazineCheck");
 
 
     }
@@ -251,6 +249,8 @@ public class CharacterController : MonoBehaviour
     {
         Vector2 currentMagazineMin = UIManager.Instance.UIController.RifleMagazine1Slider.rectTransform.offsetMin;
         Vector2 currentMagazineMax = UIManager.Instance.UIController.RifleMagazine1Slider.rectTransform.offsetMax;
+
+        UIManager.Instance.UIController.RifleObj1Magazine.SetActive(true);
 
         UIManager.Instance.UIController.RifleMagazine1Slider.rectTransform.offsetMin = new Vector2(currentMagazineMin.x,
         Mathf.Lerp(-currentMagazineMax.y, UIManager.Instance.UIController.BottomValueOfMagazine,

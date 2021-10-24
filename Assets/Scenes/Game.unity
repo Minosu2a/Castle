@@ -1036,6 +1036,7 @@ MonoBehaviour:
   _rifleMagazine1Slider: {fileID: 1214214985}
   _rifleMagazine2Slider: {fileID: 1792105604}
   _rifleMagazine3Slider: {fileID: 262440015}
+  _rifleObj1Magazine: {fileID: 1984710241}
   _rifleObj2Magazine: {fileID: 1817511075}
   _rifleObj3Magazine: {fileID: 893087033}
   _bottomValueOfMagazine: 25
@@ -1043,6 +1044,7 @@ MonoBehaviour:
   _shotgunMiddleBar: {fileID: 1232244785}
   _magazineNumber: {fileID: 678530446}
   _plusSign: {fileID: 775183060}
+  _timerToHideVisual: 1.5
 --- !u!1 &140582583
 GameObject:
   m_ObjectHideFlags: 0

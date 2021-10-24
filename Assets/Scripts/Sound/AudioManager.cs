@@ -435,6 +435,7 @@ public class AudioManager : Singleton<AudioManager>
         if (_soundData.ContainsKey(key) == false)   //Verify if the Soundata is set to loop, if it's not the case use PlayAudioOneShot instead
         {
             Debug.LogError("Fnct Start3DSound : Specified key not found for the audio file");
+            return;
         }
         else if (_soundData[key].Loop == true)
         {
