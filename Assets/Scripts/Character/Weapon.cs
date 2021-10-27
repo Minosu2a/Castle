@@ -21,6 +21,8 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected float _fireRate = 0.2f;
     [SerializeField] protected float _weaponSpread = 5f;
     [SerializeField] protected float _aimDivider = 5f; //WHEN YOU AIM THE SPREAD IS DIVIDED BY THIS VALUE
+    [SerializeField] protected float _movementMultiplier = 1.35f; //WHEN YOU MOVE THE SPREAD IS MULTIPLIED BY THIS VALUE
+
 
     [HorizontalGroup("ReloadTime")]
     [SerializeField] protected float _reloadNormalTime = 1.8f;
@@ -117,6 +119,11 @@ public abstract class Weapon : MonoBehaviour
         if(CharacterManager.Instance.CharacterController.IsAiming == true)
         {
             bulletClone.Init(transform.forward, (_weaponSpread / _aimDivider)); //GIVE THE DIRECTION TO THE BULLET + THE WEAPON SPREAD (VALUE CHANGE DEPENDING IF THE PLAYER IS AIMING OR NOT)
+        }
+        else if(CharacterManager.Instance.CharacterController.IsMoving)
+        {
+            Debug.Log(_movementMultiplier);
+            bulletClone.Init(transform.forward, (_weaponSpread * _movementMultiplier)); //GIVE THE DIRECTION TO THE BULLET + THE WEAPON SPREAD (VALUE CHANGE DEPENDING IF THE PLAYER IS AIMING OR NOT)
         }
         else
         {

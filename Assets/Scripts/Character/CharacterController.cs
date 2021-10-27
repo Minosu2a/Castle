@@ -59,6 +59,9 @@ public class CharacterController : MonoBehaviour
 
     public bool IsAiming => _isAiming;
 
+    public bool IsMoving => _isMoving;
+
+
     #region Ammunition
     public List<int> RifleMagazine
     {
@@ -124,12 +127,17 @@ public class CharacterController : MonoBehaviour
         _rifleMagazine.Add(30);
         _rifleMagazine.Add(30);
         _rifleMagazine.Add(30);
+        _pistolMagazine.Add(9);
+
 
 
     }
 
     private void Update()
     {
+
+        MagazineUpdate();
+
         if(InputManager.Instance.MouseActivated == true)
         {
             float distance = Vector3.Distance(transform.position, Camera.main.transform.position) - Camera.main.nearClipPlane;
@@ -361,6 +369,11 @@ public class CharacterController : MonoBehaviour
         _currentWeapon.gameObject.SetActive(true); //Activate the new weapon
 
         MagazineUpdate();
+
+        if(_currentWeapon.WeaponType == EWeaponType.PISTOL)
+        {
+            AudioManager.Instance.Start2DSound("S_PistolSwitch");
+        }
 
     }
     #endregion WeaponSwitch

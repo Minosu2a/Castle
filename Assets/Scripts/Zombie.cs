@@ -41,7 +41,11 @@ public class Zombie : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _navMesh = GetComponent<NavMeshAgent>();
         _navMesh.speed = _movespeed;
-        AudioManager.Instance.Start3DSound("S_EvilBreathing", this.transform); //REPLACE THIS TO BE IN DORMANT
+
+        if(_behaviour == EZombieModeType.DORMANT)
+        {
+            AudioManager.Instance.Start3DSound("S_EvilBreathing", this.transform); //REPLACE THIS TO BE IN DORMANT
+        }
     }
 
     private void OnTriggerEnter(Collider other)

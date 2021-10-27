@@ -34,6 +34,13 @@ public class UIController : MonoBehaviour
     private bool _needVisual = true;
     [Header("Other")]
     [SerializeField] private float _timerToHideVisual = 1.5f;
+
+    [Header("Post")]
+    [SerializeField] private GameObject _zombieWave1 = null;
+    [SerializeField] private GameObject _zombieWave2 = null;
+    [SerializeField] private GameObject _zombieWave3 = null;
+    [SerializeField] private GameObject _zombieWave4 = null;
+
     #endregion Fields
 
     #region Property
@@ -217,6 +224,31 @@ public class UIController : MonoBehaviour
                 _timeStamp = 0f;
             }
         }
+
+
+        //FOR ADVERTISEMENT PURPOSE 
+
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            _zombieWave1.SetActive(true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            _zombieWave2.SetActive(true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            _zombieWave3.SetActive(true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            _zombieWave4.SetActive(true);
+        }
+
     }
 
     private void HideMagazineInfo()
