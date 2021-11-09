@@ -136,8 +136,6 @@ public class CharacterController : MonoBehaviour
     private void Update()
     {
 
-        MagazineUpdate();
-
         if(InputManager.Instance.MouseActivated == true)
         {
             float distance = Vector3.Distance(transform.position, Camera.main.transform.position) - Camera.main.nearClipPlane;

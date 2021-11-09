@@ -1149,7 +1149,7 @@ MonoBehaviour:
   _shotgunMiddleBar: {fileID: 1232244785}
   _magazineNumber: {fileID: 678530446}
   _plusSign: {fileID: 775183060}
-  _timerToHideVisual: 1.5
+  _timerToHideVisual: 2
   _zombieWave1: {fileID: 199880619}
   _zombieWave2: {fileID: 1489390222}
   _zombieWave3: {fileID: 396032174}
@@ -1597,7 +1597,7 @@ MonoBehaviour:
   _rb: {fileID: 167234569}
   _walkSpeed: 10
   _sprintSpeed: 12
-  _currentWeapon: {fileID: 177209372}
+  _currentWeapon: {fileID: 1817387376}
   _secondaryWeapon: {fileID: 1140644849}
   _aimLine: {fileID: 54791568}
   _pistolMagazine: 0900000000000000
@@ -1887,7 +1887,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &177209371
 Transform:
   m_ObjectHideFlags: 0
@@ -12767,7 +12767,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1817387372
 Transform:
   m_ObjectHideFlags: 0
