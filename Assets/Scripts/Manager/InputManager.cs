@@ -20,6 +20,8 @@ public class InputManager : Singleton<InputManager>
 
     [SerializeField] private KeyCode _repackAmmoInput = KeyCode.F;
 
+    [SerializeField] private KeyCode _sprintInput = KeyCode.LeftShift;
+
 
 
     [SerializeField] private float _timerForFastReloadInput = 0.5f;
@@ -187,6 +189,11 @@ public class InputManager : Singleton<InputManager>
         if (Input.GetKeyUp(_primaryGunSwitchInput))
         {
             CharacterManager.Instance.CharacterController.SecondarySwitch();
+        }
+
+        if (Input.GetKeyDown(_sprintInput))
+        {
+           // CharacterManager.Instance.CharacterController
         }
     }
 
